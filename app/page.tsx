@@ -12,7 +12,7 @@ function App() {
   const { isConnected, chainId, address, chain } = useAccount();
 
   return (
-    <Box>
+    <Box sx={{ padding: "20px" }}>
       <Stack direction="row" justifyContent="space-between">
         <Typography
           variant="h4"
@@ -40,7 +40,7 @@ function App() {
           <Stack direction="column" alignItems="center" gap={2}>
             <Typography variant="h1">Welcome to Moore Pool!</Typography>
             <Typography variant="h4">
-              Connect Wallet to create your own Pool
+              Connect wallet to create your own pool
             </Typography>
           </Stack>
         )}
