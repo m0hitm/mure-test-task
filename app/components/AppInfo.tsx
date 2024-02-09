@@ -1,6 +1,6 @@
 import { TextField, Button, Grid, Paper } from "@mui/material";
 import { useState } from "react";
-import { AppInfoProps } from "../types/types";
+import { AppInfoProps, CreatePoolProps } from "../types/types";
 import createPool from "../utils/createPool";
 import axios from "axios";
 import TransactionDialog from "./TransactionDialog";
@@ -9,10 +9,11 @@ import * as yup from "yup";
 
 const appInfoValidationSchema = yup.object({
   appName: yup.string().required("App Name is required"),
+  version: yup.string().required("Version is required"),
   appOwner: yup
     .string()
     .required("App Owner is required")
-    .length(32, "App Owner must be exactly 32 characters long"),
+    .length(42, "App Owner must be exactly 42 characters long"),
 });
 
 export default function AppInfo(props: AppInfoProps) {
@@ -24,6 +25,7 @@ export default function AppInfo(props: AppInfoProps) {
   const [errors, setErrors] = useState({
     appName: "",
     appOwner: "",
+    version: "",
   });
 
   const [formValues, setFormValues] = useState({
@@ -139,8 +141,10 @@ export default function AppInfo(props: AppInfoProps) {
               fullWidth
               variant="outlined"
               value={formValues.version}
-              disabled
+              type="number"
               onChange={handleChange("version")}
+              error={!!errors.version}
+              helperText={errors.version}
             />
           </Grid>
           <Grid item xs={12} lg={6} md={6}>
