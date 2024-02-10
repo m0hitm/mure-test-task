@@ -50,7 +50,7 @@ export const MURE_POOL_FACTORY_ABI = [
       {
         indexed: false,
         internalType: "string",
-        name: "applName",
+        name: "appName",
         type: "string",
       },
       {
@@ -65,6 +65,7 @@ export const MURE_POOL_FACTORY_ABI = [
         name: "appAddress",
         type: "address",
       },
+      { indexed: false, internalType: "string", name: "data", type: "string" },
     ],
     name: "Deployment",
     type: "event",
@@ -111,6 +112,7 @@ export const MURE_POOL_FACTORY_ABI = [
       { internalType: "string", name: "version", type: "string" },
       { internalType: "address", name: "appOwner", type: "address" },
       { internalType: "uint256", name: "deadline", type: "uint256" },
+      { internalType: "string", name: "data", type: "string" },
       { internalType: "bytes", name: "sig", type: "bytes" },
     ],
     name: "deployAppProxy",
@@ -170,4 +172,4 @@ export const MURE_POOL_FACTORY_ABI = [
     stateMutability: "nonpayable",
     type: "function",
   },
-];
+] as const;
