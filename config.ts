@@ -1,14 +1,17 @@
 import { getDefaultConfig } from "connectkit";
-import { createConfig } from "wagmi";
+import { createConfig, http } from "wagmi";
 import { sepolia } from "wagmi/chains";
+import { injected } from "wagmi/connectors";
+import { SEPOLIA_RPC } from "./app/constants/constants";
 
-export const config = createConfig(
-  getDefaultConfig({
-    appName: "Mure Pools",
-    chains: [sepolia],
-    walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
-  })
-);
+
+export const config = createConfig({
+  chains: [sepolia],
+  connectors: [injected()],
+  transports: {
+    [sepolia.id]: http(SEPOLIA_RPC),
+  },
+});
 
 declare module "wagmi" {
   interface Register {
