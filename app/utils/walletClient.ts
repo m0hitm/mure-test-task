@@ -3,14 +3,13 @@ import {
   Chain,
   createPublicClient,
   createWalletClient,
-  http,
+  custom,
 } from "viem";
-import { SEPOLIA_RPC } from "../constants/constants";
 
 export async function getWalletClient(chain: Chain) {
   const walletClient = createWalletClient({
     chain: chain,
-    transport: http(SEPOLIA_RPC),
+    transport: custom(window.ethereum),
   });
 
   const [address] = await walletClient.getAddresses();
@@ -20,7 +19,7 @@ export async function getWalletClient(chain: Chain) {
 export async function getPublicClient(chain: Chain) {
   const publicClient = createPublicClient({
     chain: chain,
-    transport: http(SEPOLIA_RPC),
+    transport: custom(window.ethereum),
   });
 
   return publicClient;
