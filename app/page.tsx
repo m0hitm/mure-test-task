@@ -38,7 +38,7 @@ function App() {
           </>
         ) : (
           <Stack direction="column" alignItems="center" gap={2}>
-            <Typography variant="h1">Welcome to Moore Pool!</Typography>
+            <Typography variant="h1">Welcome to Mure Pool!</Typography>
             <Typography variant="h4">
               Connect wallet to create your own pool
             </Typography>
