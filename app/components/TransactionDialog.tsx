@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TransactionDialogProps } from "../types/types";
-import { Button, Stack } from "@mui/material";
+import { Button, CircularProgress, Stack } from "@mui/material";
 import { TxnStepper } from "./Stepper/TransactionStepper";
 import ErrorIcon from "@mui/icons-material/Error";
 
@@ -75,6 +75,9 @@ export default function TransactionDialog(props: TransactionDialogProps) {
           ) : (
             <>
               <TxnStepper steps={steps} activeStep={activeStep} />
+              {isDisabled && (
+                <CircularProgress sx={{ alignSelf: "center", mb: "4px" }} />
+              )}
               <Button
                 variant="contained"
                 onClick={handleModal}
