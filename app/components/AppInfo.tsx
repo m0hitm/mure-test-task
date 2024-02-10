@@ -1,11 +1,14 @@
 import { TextField, Button, Grid, Paper } from "@mui/material";
 import { useState } from "react";
-import { AppInfoProps, CreatePoolProps } from "../types/types";
+import {
+  AppInfoProps,
+  CreatePoolProps,
+  GetSignatureProps,
+} from "../types/types";
 import createPool from "../utils/createPool";
-import axios from "axios";
 import TransactionDialog from "./TransactionDialog";
-import { Address } from "viem";
 import * as yup from "yup";
+import { getSignature } from "../utils/getSignature";
 
 const appInfoValidationSchema = yup.object({
   appName: yup.string().required("App Name is required"),
@@ -28,17 +31,18 @@ export default function AppInfo(props: AppInfoProps) {
     version: "",
   });
 
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<GetSignatureProps>({
     appName: "",
-    appOwner: "",
+    appOwner: "0x",
     version: version,
     chainId: chainId,
-    caller: caller.toLowerCase(),
+    caller: caller,
   });
 
   const handleModal = () => {
     setTxError(false);
     setIsDisabled(true);
+    setActiveStep(0)
     setModal(!modal);
   };
 
@@ -78,27 +82,21 @@ export default function AppInfo(props: AppInfoProps) {
 
     try {
       handleModal();
-      const resp = await axios.get(
-        `/api?appName=${formValues.appName}&version=${
-          formValues.version
-        }&appOwner=${formValues.appOwner.toLowerCase()}&chainId=${
-          formValues.chainId
-        }&caller=${formValues.caller.toLowerCase()}`
-      );
-
-      const contractArgs = {
+      const { signature, params } = await getSignature(formValues);
+      const contractArgs: CreatePoolProps = {
         chain,
-        sig: resp.data.data.signature as string,
-        appName: formValues.appName,
-        appOwner: formValues.appOwner,
-        version: formValues.version,
-        deadline: Number(resp.data.data.params.deadline),
-        caller: caller as Address,
+        sig: signature,
+        appName: params.appName,
+        appOwner: params.appOwner,
+        version: params.version,
+        data: params.data,
+        deadline: BigInt(params.deadline),
       };
 
       setActiveStep(1);
       const proxy = await createPool(contractArgs);
-      console.log(resp.data.data.signature);
+      console.log(proxy);
+
       setActiveStep(2);
       setIsDisabled(false);
     } catch (err) {
