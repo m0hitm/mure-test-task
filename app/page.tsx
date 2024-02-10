@@ -2,10 +2,10 @@
 
 import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { Chain } from "viem";
 import AppInfo from "./components/AppInfo";
+import { sepolia } from "viem/chains";
 
 function App() {
   const theme = useTheme();
@@ -30,9 +30,9 @@ function App() {
               <Typography variant="h4">Create Your Pool</Typography>
               <AppInfo
                 version="1"
-                caller={address as string}
-                chainId={chainId as number}
-                chain={chain as Chain}
+                caller={address || "0x"}
+                chainId={chainId || 11155111}
+                chain={chain || sepolia}
               />
             </Stack>
           </>
