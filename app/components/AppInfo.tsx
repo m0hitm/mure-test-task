@@ -9,11 +9,18 @@ import {
   GetSignatureProps,
 } from "../types/types";
 import createPool from "../utils/createPool";
-import TransactionDialog from "./TransactionDialog";
 import * as yup from "yup";
 import { getSignature } from "../utils/getSignature";
-import SuccessDialog from "./SuccessDialog";
 import { Address } from "viem";
+import dynamic from "next/dynamic";
+
+const SuccessDialog = dynamic(() => import("./SuccessDialog"), {
+  ssr: false,
+});
+
+const TransactionDialog = dynamic(() => import("./TransactionDialog"), {
+  ssr: false,
+});
 
 const appInfoValidationSchema = yup.object({
   appName: yup.string().required("App Name is required"),
@@ -53,12 +60,16 @@ export default function AppInfo(props: AppInfoProps) {
     caller: caller,
   });
 
+  const openModal = () => {
+    setModal(true);
+  };
+
   const handleModal = () => {
     setTxError(false);
     setIsDisabled(true);
     setActiveStep(0);
-    setModal(!modal);
-    setSuccessModal(true);
+    handleSuccessModal();
+    setModal(false);
   };
 
   const handleSuccessModal = () => {
@@ -100,7 +111,7 @@ export default function AppInfo(props: AppInfoProps) {
     }
 
     try {
-      handleModal();
+      openModal();
       const { signature, params } = await getSignature(formValues);
       const contractArgs: CreatePoolProps = {
         chain,

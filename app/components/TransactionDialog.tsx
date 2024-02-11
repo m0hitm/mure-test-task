@@ -6,8 +6,15 @@ import { TransactionDialogProps } from "../types/types";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { TxnStepper } from "./Stepper/TransactionStepper";
 import ErrorIcon from "@mui/icons-material/Error";
+import dynamic from "next/dynamic";
+
+const TxnStepper = dynamic(
+  () => import("./Stepper/TransactionStepper").then((e) => e.TxnStepper),
+  {
+    ssr: false,
+  }
+);
 
 const style = {
   position: "absolute" as "absolute",

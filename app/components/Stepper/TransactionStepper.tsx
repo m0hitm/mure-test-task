@@ -5,11 +5,18 @@ import {
   Stepper,
   Typography,
 } from "@mui/material";
-import { TxnStepIcons } from "./TxnStepIcon.tsx";
 import { styled } from "@mui/material/styles";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
+import dynamic from "next/dynamic";
+
+const TxnStepIcons = dynamic(
+  () => import("./TxnStepIcon").then((e) => e.TxnStepIcons),
+  {
+    ssr: false,
+  }
+);
 
 interface ISteps {
   label: string;

@@ -7,10 +7,16 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
-import AppInfo from "./components/AppInfo";
 import { sepolia } from "viem/chains";
 import { useState } from "react";
-import MyPools from "./components/MyPools";
+import dynamic from "next/dynamic";
+
+const AppInfo = dynamic(() => import("./components/AppInfo"), {
+  ssr: false,
+});
+const MyPools = dynamic(() => import("./components/MyPools"), {
+  ssr: false,
+});
 
 function App() {
   const [active, setActive] = useState<"create" | "pools">("create");
