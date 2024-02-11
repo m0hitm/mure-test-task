@@ -1,9 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import axiosInstance from "../utils/axiosInstance";
 import { URL } from "url";
 
-export async function GET(request: NextApiRequest) {
+export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url as string);
   const appName = searchParams.get("appName");
   const version = searchParams.get("version");
