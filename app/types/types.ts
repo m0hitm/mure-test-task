@@ -13,6 +13,7 @@ export interface TransactionDialogProps {
   isDisabled: boolean;
   txError: boolean;
   handleModal: () => void;
+  handleSuccessModal: () => void;
 }
 
 export interface SuccessDialogProps {

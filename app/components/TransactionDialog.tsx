@@ -44,7 +44,7 @@ const steps = [
 ];
 
 export default function TransactionDialog(props: TransactionDialogProps) {
-  const { modal, handleModal, activeStep, isDisabled, txError } = props;
+  const { modal, handleModal, activeStep, isDisabled, txError, handleSuccessModal } = props;
 
   return (
     <Modal
@@ -89,7 +89,7 @@ export default function TransactionDialog(props: TransactionDialogProps) {
               )}
               <Button
                 variant="contained"
-                onClick={handleModal}
+                onClick={handleSuccessModal}
                 disabled={isDisabled}
               >
                 Done

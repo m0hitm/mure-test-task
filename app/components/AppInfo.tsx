@@ -68,12 +68,14 @@ export default function AppInfo(props: AppInfoProps) {
     setTxError(false);
     setIsDisabled(true);
     setActiveStep(0);
-    handleSuccessModal();
     setModal(false);
   };
 
   const handleSuccessModal = () => {
+    setIsDisabled(true);
+    setActiveStep(0);
     setSuccessModal(!successModal);
+    setModal(false);
   };
 
   const handleChange = (field: string) => (e: any) => {
@@ -210,6 +212,7 @@ export default function AppInfo(props: AppInfoProps) {
       <TransactionDialog
         modal={modal}
         handleModal={handleModal}
+        handleSuccessModal={handleSuccessModal}
         activeStep={activeStep}
         isDisabled={isDisabled}
         txError={txError}
