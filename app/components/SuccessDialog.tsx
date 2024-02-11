@@ -4,7 +4,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { SuccessDialogProps } from "../types/types";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
-import { Button, Stack } from "@mui/material";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 import Link from "next/link";
 
 const style = {

@@ -3,7 +3,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TransactionDialogProps } from "../types/types";
-import { Button, CircularProgress, Stack } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 import { TxnStepper } from "./Stepper/TransactionStepper";
 import ErrorIcon from "@mui/icons-material/Error";
 

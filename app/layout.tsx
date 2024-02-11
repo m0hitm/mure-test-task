@@ -3,7 +3,8 @@ import { type ReactNode } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 
 import { Providers } from "./components/providers";
-import { Container, CssBaseline } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import Container from "@mui/material/Container";
 import { theme } from "./themes/themes";
 
 export const metadata: Metadata = {

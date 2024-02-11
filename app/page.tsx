@@ -2,7 +2,10 @@
 
 import { useAccount } from "wagmi";
 import { ConnectKitButton } from "connectkit";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 import AppInfo from "./components/AppInfo";
 import { sepolia } from "viem/chains";

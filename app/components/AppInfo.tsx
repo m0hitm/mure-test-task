@@ -1,4 +1,7 @@
-import { TextField, Button, Grid, Paper } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import { useState } from "react";
 import {
   AppInfoProps,
