@@ -35,7 +35,10 @@ export default function MyPools() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  <Link href={`https://sepolia.etherscan.io/address/${row}`}>
+                  <Link
+                    href={`https://sepolia.etherscan.io/address/${row}`}
+                    target="_blank"
+                  >
                     <Typography variant="subtitle1" color="text.primary">
                       {row.substring(0, 10)}...
                     </Typography>

@@ -50,7 +50,10 @@ export default function SuccessDialog(props: SuccessDialogProps) {
           <DoneAllIcon
             sx={{ color: "#5cb85c", height: "40px", width: "40px" }}
           />
-          <Link href={`https://sepolia.etherscan.io/address/${appAddress}`}>
+          <Link
+            href={`https://sepolia.etherscan.io/address/${appAddress}`}
+            target="_blank"
+          >
             <Button variant="contained" color="primary">
               See Pool
             </Button>
