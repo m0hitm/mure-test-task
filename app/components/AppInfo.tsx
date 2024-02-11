@@ -9,10 +9,19 @@ import createPool from "../utils/createPool";
 import TransactionDialog from "./TransactionDialog";
 import * as yup from "yup";
 import { getSignature } from "../utils/getSignature";
+import SuccessDialog from "./SuccessDialog";
+import { Address } from "viem";
 
 const appInfoValidationSchema = yup.object({
   appName: yup.string().required("App Name is required"),
-  version: yup.string().required("Version is required"),
+  version: yup
+    .string()
+    .required("Version is required")
+    .test(
+      "is-greater-than-0",
+      "Version must be greater than 0",
+      (value) => parseInt(value, 10) > 0
+    ),
   appOwner: yup
     .string()
     .required("App Owner is required")
@@ -22,9 +31,11 @@ const appInfoValidationSchema = yup.object({
 export default function AppInfo(props: AppInfoProps) {
   const { version, caller, chainId, chain } = props;
   const [modal, setModal] = useState<boolean>(false);
+  const [successModal, setSuccessModal] = useState<boolean>(false);
   const [activeStep, setActiveStep] = useState<number>(0);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [txError, setTxError] = useState<boolean>(false);
+  const [appAddress, setAppAddress] = useState<Address | string>("");
   const [errors, setErrors] = useState({
     appName: "",
     appOwner: "",
@@ -42,8 +53,13 @@ export default function AppInfo(props: AppInfoProps) {
   const handleModal = () => {
     setTxError(false);
     setIsDisabled(true);
-    setActiveStep(0)
+    setActiveStep(0);
     setModal(!modal);
+    setSuccessModal(true);
+  };
+
+  const handleSuccessModal = () => {
+    setSuccessModal(!successModal);
   };
 
   const handleChange = (field: string) => (e: any) => {
@@ -95,8 +111,7 @@ export default function AppInfo(props: AppInfoProps) {
 
       setActiveStep(1);
       const proxy = await createPool(contractArgs);
-      console.log(proxy);
-
+      setAppAddress(proxy);
       setActiveStep(2);
       setIsDisabled(false);
     } catch (err) {
@@ -184,6 +199,11 @@ export default function AppInfo(props: AppInfoProps) {
         activeStep={activeStep}
         isDisabled={isDisabled}
         txError={txError}
+      />
+      <SuccessDialog
+        successModal={successModal}
+        handleSuccessModal={handleSuccessModal}
+        appAddress={appAddress}
       />
     </form>
   );
