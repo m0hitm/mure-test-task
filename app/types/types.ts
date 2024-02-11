@@ -15,6 +15,11 @@ export interface TransactionDialogProps {
   handleModal: () => void;
 }
 
+export interface SuccessDialogProps {
+  successModal: boolean;
+  handleSuccessModal: () => void;
+  appAddress: Address | string;
+}
 export interface GetSignatureProps {
   appName: string;
   version: string;
